@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script src="https://cdn.staticfile.org/react/16.4.0/umd/react.development.js"></script>
+    <script src="https://cdn.staticfile.org/react-dom/16.4.0/umd/react-dom.development.js"></script>
+    <!-- 生产环境中不建议使用 -->
+    <script src="https://cdn.staticfile.org/babel-standalone/6.26.0/babel.min.js"></script>
+
+    <script src="https://cdn.bootcss.com/prop-types/15.6.1/prop-types.js"></script>
+</head>
+<body>
+
+    <div id="example"></div>
+
+    <script type="text/babel">
+        var title = 123;
+        // var title = 123;
+        class MyTitle extends React.Component {
+        render() {
+            return (
+            <h1>Hello, {this.props.title}</h1>
+            );
+        }
+        }
+        
+        MyTitle.propTypes = {
+        title: PropTypes.string
+        };
+        ReactDOM.render(
+            <MyTitle title={title} />,
+            document.getElementById('example')
+        );       
+    
+    </script>
+
+    <script type="text/babel">
+        var title = "菜鸟教程";
+        // var title = 123;
+        var MyTitle = React.createClass({
+        propTypes: {
+            title: React.PropTypes.string.isRequired,
+        },
+        
+        render: function() {
+            return <h1> {this.props.title} </h1>;
+        }
+        });
+        ReactDOM.render(
+            <MyTitle title={title} />,
+            document.getElementById('example')
+        );
+
+    </script>
+    
+</body>
+</html>

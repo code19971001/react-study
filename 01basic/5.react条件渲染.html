@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script src="https://cdn.staticfile.org/react/16.4.0/umd/react.development.js"></script>
+    <script src="https://cdn.staticfile.org/react-dom/16.4.0/umd/react-dom.development.js"></script>
+    <!-- 生产环境中不建议使用 -->
+    <script src="https://cdn.staticfile.org/babel-standalone/6.26.0/babel.min.js"></script>
+
+    <script src="https://cdn.bootcss.com/prop-types/15.6.1/prop-types.js"></script>
+
+
+</head>
+<body>
+    <div id="example"></div>
+    <script type="text/babel">
+        function UserGreeting(props) {
+        return <h1>欢迎回来!</h1>;
+        }
+
+        function GuestGreeting(props) {
+        return <h1>请先注册。</h1>;
+        }
+
+        function Greeting(props) {
+            const isLoggedIn = props.isLoggedIn;
+            if (isLoggedIn) {
+                return <UserGreeting />;
+            }
+            return <GuestGreeting />;
+        }
+            
+        ReactDOM.render(
+            // 尝试修改 isLoggedIn={true}:
+            <Greeting isLoggedIn={true} />,
+            document.getElementById('example')
+        );      
+    
+    </script>
+    
+</body>
+</html>

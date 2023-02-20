@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>类的基本知识</title>
+  <script src="https://cdn.staticfile.org/react/16.4.0/umd/react.development.js"></script>
+  <script src="https://cdn.staticfile.org/react-dom/16.4.0/umd/react-dom.development.js"></script>
+  <!-- 生产环境中不建议使用 -->
+  <script src="https://cdn.staticfile.org/babel-standalone/6.26.0/babel.min.js"></script>
+
+</head>
+<body>
+  <script type="text/javascript">
+    /**
+     *总结：
+     * 1.类中的构造器不是必须写的，要对实例进行一些初始化操作的时候，
+     *   才会写，如添加指定的属性的时候才会写。
+     * 2.如果A类继承了B类，且A类中写了构造器，那么A类构造器中的Super是
+     *   必须要调用的。
+     * 3.类中定义的方法，都是放在类的原型对象上，供该类的对象进行调用的。
+     */
+
+
+    class Person{
+      constructor(name,age){
+        //构造器中的this是谁？--类的实例对象
+        this.name=name;
+        this.age=age;
+      }
+      speak(){
+        //注意这里是着重符号而不是单引号。
+        //speak方法放在了哪里？----类的原型对象上，供实例使用。
+        //当我们使用Person实例去调用speak的时候，speak中的this就是person实例。
+        console.log(`我叫${this.name},今年${this.age}岁`);
+      }
+
+    }
+    class Student extends Person{
+      constructor(name,age,grade){
+        //如果我们写了构造器。必须调用父类的构造器，使用super来进行调用，必须放在开始。
+        //Uncaught ReferenceError: Must call super constructor in derived 
+        //class before accessing 'this' or returning from derived constructor
+        super(name,age);
+        this.grade=grade;
+      }
+      
+      speak(){
+        //重写父类的方法。
+        console.log(`我叫${this.name},今年${this.age}岁,今年${this.grade}年级了！`);
+      }
+      study(){
+        console.log('我很努力的学习！！！');
+      }
+
+    }
+    
+    const p1=new Person("张三",18);
+    const p2=new Person("李四",28);
+    //Person{name:"张三",age:18}
+    console.log(p1);
+    console.log("class类的定义："+p2);
+    p1.speak();
+    p2.speak();
+    //注意对象.实例调用方法和call调用的区别。---call可以更改this的指向。
+    //我叫undefined,今年undefined岁
+    p1.speak.call({a:1,b:2});
+    //我叫王八,今年undefined岁
+    p1.speak.call({name:"王八",b:18});
+
+    //可以继承person的有参构造器。
+    const student1=new Student('张学友',18,'大一');
+    console.log(student1);
+    student1.speak();
+    student1.study();
+
+  
+  </script>  
+  
+</body>
+</html>

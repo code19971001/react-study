@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hello React</title>
+
+  <!-- react核心库 -->
+  <script src="https://cdn.staticfile.org/react/16.4.0/umd/react.development.js"></script>
+  <!-- react dom库：用于提供对DOM操作的支持 -->
+  <script src="https://cdn.staticfile.org/react-dom/16.4.0/umd/react-dom.development.js"></script>
+  <!-- 生产环境中不建议使用:babel可以实现将ES6转ES5，Jsx转换为Js -->
+  <script src="https://cdn.staticfile.org/babel-standalone/6.26.0/babel.min.js"></script> 
+  <style>
+    .title{
+      background-color: aqua
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 准备好一个容器 -->
+  <div id="hello"></div>
+
+  <!-- 默认情况下是""。需要使用babel来进行解析：在Prod环境中需要先进行预编译 -->
+  <script type="text/babel">
+    // 创建虚拟DOM，注意不能添加引号
+    //创建方式1：jsx的方式
+    const VDOM = <h1>Hello, React</h1>
+    //创建方式2：js语法
+    const vDom02 = React.createElement('h1',{id:'title'},'Hello,React')
+    // 渲染虚拟DOM到页面
+    ReactDOM.render(vDom02,document.getElementById("hello"))
+    // 虚拟DOM本质上是Object类型对象；相对于真实DOM，比较轻，属性比较少；虚拟DOM最终会被React转换为真实DOM，呈现在页面上。
+    console.log("VDOM is :"+VDOM);
+    console.log("VDOM is type is :"+ typeof(VDOM));
+    console.log("VDOM is Object?:"+ (VDOM instanceof Object));
+  </script>
+  
+</body>
+</html>

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script src="https://cdn.staticfile.org/react/16.4.0/umd/react.development.js"></script>
+    <script src="https://cdn.staticfile.org/react-dom/16.4.0/umd/react-dom.development.js"></script>
+    <!-- 生产环境中不建议使用 -->
+    <script src="https://cdn.staticfile.org/babel-standalone/6.26.0/babel.min.js"></script>
+
+    <script src="https://cdn.bootcss.com/prop-types/15.6.1/prop-types.js"></script>
+
+</head>
+<body>
+
+    <!--1.html中的方式-->
+    <button onclick="activateLasers()">html的方式</button>
+
+    
+    <!--2.使用react的方式-->
+    <div id="example"></div>
+    <script type="text/babel">
+        //1.家里虚拟dom对象
+        function ClickEvent(){
+            return (
+                <button onClick={activateLasers}>激活框</button>
+            );
+        }
+
+        //2.渲染虚拟dom对象
+        ReactDOM.render(
+            <ClickEvent />,
+            document.getElementById('example')
+
+        )
+
+    </script>
+
+    <script type="text/javaScript">
+        function activateLasers(){
+            alert("按钮被激活");
+        }
+    </script>
+
+    
+    <!--1.在html中的写法-->
+    <a href="http://www.baidu.com" onclick="return false;">百度一下，你就知道</a>
+    <!--2.在react中的写法-->
+    <div id="example2"></div>
+    <script type="text/babel">
+        //1.创建一个组件
+        function ActionLink() {
+            function handleClick(e) {
+                e.preventDefault();
+                console.log('链接被点击');
+            }
+        
+            return (
+                <a href="http://www.baidu.com" onClick={handleClick}>
+                点我
+                </a>
+            );
+
+        }
+        //2.渲染组件
+        ReactDOM.render(
+            <ActionLink />,
+            document.getElementById('example2')
+        )
+
+    </script>
+
+    <div id="example3"></div>
+    <script type="text/babel">
+        class Toggle extends React.Component {
+            constructor(props) {
+              super(props);
+              this.state = {isToggleOn: true};
+           
+              // 这边绑定是必要的，这样 `this` 才能在回调函数中使用
+              this.handleClick = this.handleClick.bind(this);
+            }
+           
+            handleClick() {
+              this.setState(prevState => ({
+                isToggleOn: !prevState.isToggleOn
+              }));
+            }
+           
+            render() {
+              return (
+                <button onClick={this.handleClick}>
+                  {this.state.isToggleOn ? 'ON' : 'OFF'}
+                </button>
+              );
+            }
+          }
+           
+          ReactDOM.render(
+            <Toggle />,
+            document.getElementById('example3')
+          );
+    </script>
+
+
+</body>
+</html>

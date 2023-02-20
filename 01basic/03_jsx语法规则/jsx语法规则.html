@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>jsx语法规则</title>
+
+  <script src="https://cdn.staticfile.org/react/16.4.0/umd/react.development.js"></script>
+  <script src="https://cdn.staticfile.org/react-dom/16.4.0/umd/react-dom.development.js"></script>
+  <!-- 生产环境中不建议使用 -->
+  <script src="https://cdn.staticfile.org/babel-standalone/6.26.0/babel.min.js"></script> 
+  <style>
+    .title{
+      background-color: rgb(165, 177, 167)
+    }
+  </style>
+</head>
+<body>
+
+  <div id="test"></div>
+  <script type="text/babel">
+    /**
+     * jsx 语法规则：
+     * 1.定义虚拟DOM的时候不要写引号。
+     * 2.标签中混入js表达式的时候使用{ }包裹起来。
+     * 3.样式的类名指定不要使用class，要使用className.
+     * 4.内联样式需要使用style={{key:value}}的形式来写外层{}代表是js，内能{}代表是对象。
+     * 5.虚拟DOM不能有多个根标签，根标签只能有一个。
+     * 6.标签必须闭合。
+     * 7.标签中的标签首字母。
+     *    如果是小写字母开头，则将该标签转为html标签，如果html中无此标签对应的同名元素，则报错。
+     *    如果是大写开头，则将该标签认为该标签为react组件，那么就去渲染指定组件，如果组件没有定义则报错。
+     * 
+     */
+    const myId="test001";
+    const myData='Hello,react';
+    //1.创建虚拟DOM
+    const vDOM = (
+      <div>
+        <h2 className="title" id={myId.toLowerCase()}>
+          <span style={{color:'red',fontSize:'30px'}}>{myData.toLowerCase()}</span>
+        </h2>
+        <input type='text' name='username' placeholder='请输入用户名'/>
+        <good>good good study</good>
+      </div>
+    );
+    //2.渲染虚拟DOM
+    ReactDOM.render(
+      vDOM,
+      document.getElementById('test')
+    )
+  </script>
+  
+</body>
+</html>
